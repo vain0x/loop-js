@@ -40,7 +40,7 @@ export class Loop<T> implements LoopInterface<T> {
   // Combinators
   // ---------------------------------------------
 
-  map<U>(mapping: (item: T) => U): Loop<U> {
+  map<U>(mapping: (item: T, index: number) => U): Loop<U> {
     return new Loop(new MapLoop<T, U>(this, mapping))
   }
 }

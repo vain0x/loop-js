@@ -17,6 +17,17 @@ it("map", () => {
   equal(xs.join(","), "0,2,4,6,8")
 })
 
+it("map with indices", () => {
+  let s = ""
+  Loop.range(0, 5)
+    .map(x => "abcde"[x])
+    .map((x, i) => [i, x])
+    .iterate(([i, x]) => {
+      s += `${i}:${x};`
+    })
+  equal(s, "0:a;1:b;2:c;3:d;4:e;")
+})
+
 describe("white-box", () => {
   it("reused loop object should work", () => {
     // Count of calls to the mapping.
