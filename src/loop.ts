@@ -1,6 +1,7 @@
 import { loopForEach } from "./impl/for_each"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
+import { loopReduce } from "./impl/reduce"
 
 export interface LoopInterface<T> {
   /**
@@ -43,6 +44,14 @@ export class Loop<T> implements LoopInterface<T> {
 
   forEach(action: (item: T, index: number) => void): void {
     loopForEach(this.inner, action)
+  }
+
+  reduce<S>(reducer: (prev: S, item: T, index: number) => S, initialValue: S): S
+  reduce(reducer: (prev: T, item: T, index: number) => T): T
+  reduce(reducer: unknown, initialValue?: unknown): unknown {
+    return arguments.length === 1
+      ? loopReduce(this.inner, reducer as any)
+      : loopReduce(this.inner, reducer as any, initialValue as any)
   }
 
   map<U>(mapping: (item: T, index: number) => U): Loop<U> {

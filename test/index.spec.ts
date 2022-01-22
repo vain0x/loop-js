@@ -17,6 +17,26 @@ it("forEach", () => {
   equal(s, "0:a;1:b;2:c;3:d;4:e;")
 })
 
+it("reduce with initial value", () => {
+  let s = ""
+  const result = Loop.range(0, 5).map(i => "abcde"[i]).reduce((prev, item, index) => {
+    s += `${index}:${prev}:${item};`
+    return prev + item
+  }, "")
+  equal(result, "abcde")
+  equal(s, "0::a;1:a:b;2:ab:c;3:abc:d;4:abcd:e;")
+})
+
+it("reduce without initial value", () => {
+  let s = ""
+  const result = Loop.range(0, 5).map(i => "abcde"[i]).reduce((prev, item, index) => {
+    s += `${index}:${prev}:${item};`
+    return prev + item
+  })
+  equal(result, "abcde")
+  equal(s, "1:a:b;2:ab:c;3:abc:d;4:abcd:e;")
+})
+
 it("map", () => {
   const xs: number[] = []
   Loop.range(0, 5).map(i => i * 2).iterate(x => {
