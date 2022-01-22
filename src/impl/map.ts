@@ -1,4 +1,4 @@
-import type { LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop"
 
 export class MapLoop<T, U> implements LoopInterface<U> {
   constructor(
@@ -7,10 +7,10 @@ export class MapLoop<T, U> implements LoopInterface<U> {
   ) {
   }
 
-  iterate(action: (item: U) => void): void {
+  iterate(action: (item: U) => void, flow: Flow): void {
     let index = 0
     this.source.iterate(item => {
       action(this.mapping(item, index++))
-    })
+    }, flow)
   }
 }

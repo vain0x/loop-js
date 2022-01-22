@@ -3,7 +3,7 @@ import { Loop } from "../src"
 
 it("range", () => {
   let sum = 0
-  Loop.range(0, 10).iterate(i => {
+  Loop.range(0, 10).forEach(i => {
     sum += i
   })
   equal(sum, 45)
@@ -39,7 +39,7 @@ it("reduce without initial value", () => {
 
 it("map", () => {
   const xs: number[] = []
-  Loop.range(0, 5).map(i => i * 2).iterate(x => {
+  Loop.range(0, 5).map(i => i * 2).forEach(x => {
     xs.push(x)
   })
   equal(xs.join(","), "0,2,4,6,8")
@@ -50,10 +50,25 @@ it("map with indices", () => {
   Loop.range(0, 5)
     .map(x => "abcde"[x])
     .map((x, i) => [i, x])
-    .iterate(([i, x]) => {
+    .forEach(([i, x]) => {
       s += `${i}:${x};`
     })
   equal(s, "0:a;1:b;2:c;3:d;4:e;")
+})
+
+it("every", () => {
+  equal(Loop.range(0, 5).every(x => x < 5), true)
+  equal(Loop.range(0, 5).every(x => x < 2), false)
+})
+
+it("every early break", () => {
+  let s = ""
+  const ok = Loop.range(0, 5).every(x => {
+    s += `${x};`
+    return x < 2
+  })
+  equal(ok, false)
+  equal(s, "0;1;2;")
 })
 
 describe("white-box", () => {
@@ -70,7 +85,7 @@ describe("white-box", () => {
       const xs: number[] = []
 
       // Reuse pre-built loop object.
-      loop.iterate(x => xs.push(x))
+      loop.forEach(x => xs.push(x))
       equal(count, 5 * (i + 1))
 
       equal(xs.join(","), "0,2,4,6,8")

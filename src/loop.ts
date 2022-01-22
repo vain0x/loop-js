@@ -3,11 +3,18 @@ import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
 
+export interface Flow {
+  /** Indicates current iteration is still running (not break). */
+  running: boolean
+}
+
 export interface LoopInterface<T> {
   /**
    * Runs a loop. That is, this function calls the specified action repeatedly.
+   *
+   * - Mutate `flow.running <- false` to `break` from current iteration.
    */
-  iterate(action: (item: T) => void): void
+  iterate(action: (item: T) => void, flow: Flow): void
 }
 
 /**
@@ -17,8 +24,8 @@ export class Loop<T> implements LoopInterface<T> {
   constructor(private readonly inner: LoopInterface<T>) { }
 
   // implements LoopInterface
-  iterate(action: (item: T) => void): void {
-    this.inner.iterate(action)
+  iterate(action: (item: T) => void, flow: Flow): void {
+    this.inner.iterate(action, flow)
   }
 
   // ---------------------------------------------
@@ -43,7 +50,7 @@ export class Loop<T> implements LoopInterface<T> {
   // ---------------------------------------------
 
   forEach(action: (item: T, index: number) => void): void {
-    loopForEach(this.inner, action)
+    loopForEach(this.inner, action, { running: true })
   }
 
   reduce<S>(reducer: (prev: S, item: T, index: number) => S, initialValue: S): S
@@ -52,6 +59,19 @@ export class Loop<T> implements LoopInterface<T> {
     return arguments.length === 1
       ? loopReduce(this.inner, reducer as any)
       : loopReduce(this.inner, reducer as any, initialValue as any)
+  }
+
+  every(predicate: (item: T, index: number) => boolean): boolean {
+    const flow = { running: true }
+    let ok = true
+    let index = 0
+    this.inner.iterate(item => {
+      if (!predicate(item, index++)) {
+        ok = false
+        flow.running = false
+      }
+    }, flow)
+    return ok
   }
 
   map<U>(mapping: (item: T, index: number) => U): Loop<U> {
