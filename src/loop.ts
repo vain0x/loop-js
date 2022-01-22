@@ -1,3 +1,4 @@
+import { loopForEach } from "./impl/for_each"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 
@@ -39,6 +40,10 @@ export class Loop<T> implements LoopInterface<T> {
   // ---------------------------------------------
   // Combinators
   // ---------------------------------------------
+
+  forEach(action: (item: T, index: number) => void): void {
+    loopForEach(this.inner, action)
+  }
 
   map<U>(mapping: (item: T, index: number) => U): Loop<U> {
     return new Loop(new MapLoop<T, U>(this, mapping))

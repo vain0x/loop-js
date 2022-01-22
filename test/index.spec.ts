@@ -9,6 +9,14 @@ it("range", () => {
   equal(sum, 45)
 })
 
+it("forEach", () => {
+  let s = ""
+  Loop.range(0, 5).map(i => "abcde"[i]).forEach((x, i) => {
+    s += `${i}:${x};`
+  })
+  equal(s, "0:a;1:b;2:c;3:d;4:e;")
+})
+
 it("map", () => {
   const xs: number[] = []
   Loop.range(0, 5).map(i => i * 2).iterate(x => {
