@@ -1,6 +1,10 @@
 import { equal } from "assert/strict"
-import { value } from "../src"
+import { Loop } from "../src"
 
-it("passing", () => {
-  equal(value, 1)
+it("range", () => {
+  let sum = 0
+  Loop.range(0, 10).iterate(i => {
+    sum += i
+  })
+  equal(sum, 45)
 })
