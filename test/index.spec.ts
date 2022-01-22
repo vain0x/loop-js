@@ -8,3 +8,11 @@ it("range", () => {
   })
   equal(sum, 45)
 })
+
+it("map", () => {
+  const xs: number[] = []
+  Loop.range(0, 5).map(i => i * 2).iterate(x => {
+    xs.push(x)
+  })
+  equal(xs.join(","), "0,2,4,6,8")
+})

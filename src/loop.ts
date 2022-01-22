@@ -35,4 +35,12 @@ export class Loop<T> implements LoopInterface<T> {
   static range(start: number, end: number): Loop<number> {
     return new Loop(new RangeLoop(start, end))
   }
+
+  // ---------------------------------------------
+  // Combinators
+  // ---------------------------------------------
+
+  map<U>(mapping: (item: T) => U): Loop<U> {
+    return new Loop(new MapLoop<T, U>(this, mapping))
+  }
 }
