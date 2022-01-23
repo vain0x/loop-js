@@ -5,6 +5,7 @@ import { FromArrayLoop } from "./impl/from"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
+import { ReverseLoop } from "./impl/reverse"
 import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
 
@@ -85,6 +86,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   filter(predicate: (item: T, index: number) => boolean): Loop<T> {
     return new Loop(new FilterLoop<T>(this.inner, predicate))
+  }
+
+  reverse(): Loop<T> {
+    return new Loop(new ReverseLoop<T>(this.inner))
   }
 
   toArray(): T[] {

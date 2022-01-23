@@ -100,6 +100,17 @@ it("some", () => {
   equal(Loop.range(0, 5).some(x => x === 5), false)
 })
 
+it("reverse", () => {
+  deepEqual(Loop.range(0, 5).reverse().toArray(), [4, 3, 2, 1, 0])
+
+  let n = 0
+  equal(Loop.range(0, 5).reverse().every(x => {
+    n++
+    return x >= 3
+  }), false)
+  equal(n, 3)
+})
+
 it("fromArray", () => {
   Loop.fromArray([]).forEach(() => { throw new Error("not called") })
 
