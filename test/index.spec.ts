@@ -100,9 +100,29 @@ it("some", () => {
   equal(Loop.range(0, 5).some(x => x === 5), false)
 })
 
+it("fromArray", () => {
+  Loop.fromArray([]).forEach(() => { throw new Error("not called") })
+
+  let s = ""
+  Loop.fromArray([0, 1, 2, 3, 4]).forEach(x => {
+    s += `${x};`
+  })
+  equal(s, "0;1;2;3;4;")
+})
+
+it("fromArray early break", () => {
+  let count = 0
+  const ok = Loop.fromArray([0, 1, 2, 3, 4]).every(x => {
+    count++
+    return x < 2
+  })
+  equal(ok, false)
+  equal(count, 3)
+})
+
 it("toArray", () => {
   const array = Loop.range(0, 5).toArray()
-  deepEqual(array, [0,1,2,3,4])
+  deepEqual(array, [0, 1, 2, 3, 4])
 })
 
 it("toArray freshness", () => {

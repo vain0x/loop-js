@@ -1,6 +1,7 @@
 import { loopEvery } from "./impl/every"
 import { FilterLoop } from "./impl/filter"
 import { loopForEach } from "./impl/for_each"
+import { FromArrayLoop } from "./impl/from"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
@@ -47,6 +48,11 @@ export class Loop<T> implements LoopInterface<T> {
    */
   static range(start: number, end: number): Loop<number> {
     return new Loop(new RangeLoop(start, end))
+  }
+
+  /** Creates a loop from an array. */
+  static fromArray<T>(source: readonly T[]): Loop<T> {
+    return new Loop(new FromArrayLoop(source))
   }
 
   // ---------------------------------------------
