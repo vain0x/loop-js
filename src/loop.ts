@@ -1,4 +1,5 @@
 import { loopEvery } from "./impl/every"
+import { FilterLoop } from "./impl/filter"
 import { loopForEach } from "./impl/for_each"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
@@ -72,6 +73,10 @@ export class Loop<T> implements LoopInterface<T> {
   }
 
   map<U>(mapping: (item: T, index: number) => U): Loop<U> {
-    return new Loop(new MapLoop<T, U>(this, mapping))
+    return new Loop(new MapLoop<T, U>(this.inner, mapping))
+  }
+
+  filter(predicate: (item: T, index: number) => boolean): Loop<T> {
+    return new Loop(new FilterLoop<T>(this.inner, predicate))
   }
 }

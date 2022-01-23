@@ -56,6 +56,20 @@ it("map with indices", () => {
   equal(s, "0:a;1:b;2:c;3:d;4:e;")
 })
 
+it("filter", () => {
+  let t = ""
+  let s = ""
+  Loop.range(0, 5)
+    .map(x => "a_c_e"[x])
+    .filter((x, i) => {
+      t += `${i}:${x};`
+      return x !== "_"
+    })
+    .forEach((x, i) => { s += `${i}:${x};` })
+  equal(s, "0:a;1:c;2:e;")
+  equal(t, "0:a;1:_;2:c;3:_;4:e;")
+})
+
 it("every", () => {
   equal(Loop.range(0, 5).every(x => x < 5), true)
   equal(Loop.range(0, 5).every(x => x < 2), false)
