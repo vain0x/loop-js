@@ -1,4 +1,4 @@
-import { equal } from "assert/strict"
+import { deepEqual, notEqual, equal } from "assert/strict"
 import { Loop } from "../src"
 
 it("range", () => {
@@ -98,6 +98,15 @@ it("map+every early break (2)", () => {
 it("some", () => {
   equal(Loop.range(0, 5).some(x => x === 4), true)
   equal(Loop.range(0, 5).some(x => x === 5), false)
+})
+
+it("toArray", () => {
+  const array = Loop.range(0, 5).toArray()
+  deepEqual(array, [0,1,2,3,4])
+})
+
+it("toArray freshness", () => {
+  notEqual(Loop.range(0, 0).toArray(), Loop.range(0, 0).toArray())
 })
 
 describe("white-box", () => {
