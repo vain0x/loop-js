@@ -3,6 +3,7 @@ import { loopForEach } from "./impl/for_each"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
+import { loopSome } from "./impl/some"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -64,6 +65,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   every(predicate: (item: T, index: number) => boolean): boolean {
     return loopEvery(this.inner, predicate)
+  }
+
+  some(predicate: (item: T, index: number) => boolean): boolean {
+    return loopSome(this.inner, predicate)
   }
 
   map<U>(mapping: (item: T, index: number) => U): Loop<U> {

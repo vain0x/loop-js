@@ -81,6 +81,11 @@ it("map+every early break (2)", () => {
   equal(s, "0;1;")
 })
 
+it("some", () => {
+  equal(Loop.range(0, 5).some(x => x === 4), true)
+  equal(Loop.range(0, 5).some(x => x === 5), false)
+})
+
 describe("white-box", () => {
   it("reused loop object should work", () => {
     // Count of calls to the mapping.
