@@ -10,6 +10,7 @@ import { TakeLoop } from "./impl/take"
 import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
 import { SkipLoop } from "./impl/skip"
+import { SliceLoop } from "./impl/slice"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -100,6 +101,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   skip(count: number): Loop<T> {
     return new Loop(new SkipLoop<T>(this.inner, count))
+  }
+
+  slice(start: number, end: number): Loop<T> {
+    return new Loop(new SliceLoop<T>(this.inner, start, end))
   }
 
   toArray(): T[] {

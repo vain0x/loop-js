@@ -143,6 +143,20 @@ it("skip extreme values", () => {
   deepEqual(Loop.range(0, 5).skip(Infinity).toArray(), [])
 })
 
+it("slice", () => {
+  deepEqual(Loop.range(0, 5).slice(1, 4).toArray(), [1, 2, 3])
+
+  // Reversed interval.
+  deepEqual(Loop.range(0, 5).slice(4, 1).toArray(), [])
+
+  // FIXME: Negative indices.
+  // deepEqual(Loop.range(0, 5).slice(-1).toArray(), [4])
+})
+
+it("slice extreme values", () => {
+  deepEqual(Loop.range(0, 5).slice(-Infinity, Infinity).toArray(), [0, 1, 2, 3, 4])
+})
+
 it("fromArray", () => {
   Loop.fromArray([]).forEach(() => { throw new Error("not called") })
 
