@@ -111,6 +111,22 @@ it("reverse", () => {
   equal(n, 3)
 })
 
+it("take", () => {
+  deepEqual(Loop.range(0, 5).take(0).toArray(), [])
+  deepEqual(Loop.range(0, 5).take(3).toArray(), [0, 1, 2])
+  deepEqual(Loop.range(0, 5).take(5).toArray(), [0, 1, 2, 3, 4])
+})
+
+it("take extreme values", () => {
+  // take(negative) and take(NaN) are empty.
+  deepEqual(Loop.range(0, 5).take(-1).every(() => false), true)
+  deepEqual(Loop.range(0, 5).take(-Infinity).every(() => false), true)
+  deepEqual(Loop.range(0, 5).take(NaN).toArray().length, 5)
+
+  // take(infinity) is full.
+  deepEqual(Loop.range(0, 5).take(Infinity).toArray().length, 5)
+})
+
 it("fromArray", () => {
   Loop.fromArray([]).forEach(() => { throw new Error("not called") })
 

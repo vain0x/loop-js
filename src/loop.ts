@@ -6,6 +6,7 @@ import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
 import { ReverseLoop } from "./impl/reverse"
+import { TakeLoop } from "./impl/take"
 import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
 
@@ -90,6 +91,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   reverse(): Loop<T> {
     return new Loop(new ReverseLoop<T>(this.inner))
+  }
+
+  take(count: number): Loop<T> {
+    return new Loop(new TakeLoop<T>(this.inner, count))
   }
 
   toArray(): T[] {
