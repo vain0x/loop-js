@@ -9,6 +9,7 @@ import { ReverseLoop } from "./impl/reverse"
 import { TakeLoop } from "./impl/take"
 import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
+import { SkipLoop } from "./impl/skip"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -95,6 +96,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   take(count: number): Loop<T> {
     return new Loop(new TakeLoop<T>(this.inner, count))
+  }
+
+  skip(count: number): Loop<T> {
+    return new Loop(new SkipLoop<T>(this.inner, count))
   }
 
   toArray(): T[] {
