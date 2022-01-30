@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "npm run tsc-build",
-    "watch": "npm-run-concurrently tsc-watch mocha-watch",
+    "dev": "npm-run-concurrently tsc-watch mocha-watch",
     "test": "npm run build && mocha target/examples target/tests",
     "tsc-build": "tsc --build",
     "tsc-watch": "tsc --build --watch",
