@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "composite": true,
+        "declaration": true,
+
         "baseUrl": ".",
         "esModuleInterop": true,
         "jsx": "react",
@@ -15,5 +18,14 @@
         "sourceMap": true,
         "strict": true,
         "target": "ES2020"
-    }
+    },
+    "include": [
+        "examples/**/*.ts",
+        "src/**/*.ts",
+        "test/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "target"
+    ]
 }
