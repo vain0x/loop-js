@@ -11,6 +11,7 @@ import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
 import { SkipLoop } from "./impl/skip"
 import { SliceLoop } from "./impl/slice"
+import { loopJoin } from "./impl/join"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -109,5 +110,9 @@ export class Loop<T> implements LoopInterface<T> {
 
   toArray(): T[] {
     return loopToArray(this.inner, { running: true })
+  }
+
+  join(sep?: string): string {
+    return loopJoin(this.inner, sep ?? "", { running: true })
   }
 }

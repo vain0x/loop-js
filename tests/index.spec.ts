@@ -186,6 +186,13 @@ it("toArray freshness", () => {
   notEqual(Loop.range(0, 0).toArray(), Loop.range(0, 0).toArray())
 })
 
+it("join", () => {
+  equal(Loop.range(0, 5).join(), "01234")
+  equal(Loop.range(0, 5).join(","), "0,1,2,3,4")
+
+  equal(Loop.range(0, 0).join(","), "")
+})
+
 describe("white-box", () => {
   it("reused loop object should work", () => {
     // Count of calls to the mapping.
