@@ -12,6 +12,7 @@ import { loopToArray } from "./impl/to_array"
 import { SkipLoop } from "./impl/skip"
 import { SliceLoop } from "./impl/slice"
 import { loopJoin } from "./impl/join"
+import { loopFind } from "./impl/find"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -114,5 +115,11 @@ export class Loop<T> implements LoopInterface<T> {
 
   join(sep?: string): string {
     return loopJoin(this.inner, sep ?? "", { running: true })
+  }
+
+  find<S extends T>(predicate: (value: T, index: number) => value is S): S | undefined
+  find(predicate: (value: T, index: number) => unknown): T | undefined
+  find(predicate: (value: T, index: number) => unknown): unknown {
+    return loopFind(this.inner, predicate, { running: true })
   }
 }

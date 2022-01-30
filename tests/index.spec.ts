@@ -1,5 +1,8 @@
+import assert from "assert"
 import { deepEqual, notEqual, equal } from "assert/strict"
 import { Loop } from "../src"
+
+const isError = (value: unknown): value is Error => value instanceof Error
 
 it("range", () => {
   let sum = 0
@@ -155,6 +158,17 @@ it("slice", () => {
 
 it("slice extreme values", () => {
   deepEqual(Loop.range(0, 5).slice(-Infinity, Infinity).toArray(), [0, 1, 2, 3, 4])
+})
+
+it("find", () => {
+  equal(Loop.range(0, 5).find(x => x === 2), 2)
+  equal(Loop.range(0, 5).find(x => x === 5), undefined)
+})
+
+it("find (type guard)", () => {
+  const e = Loop.fromArray([{}, new Error("error")]).find(isError)
+  assert.ok(e != undefined)
+  equal(e.message, "error")
 })
 
 it("fromArray", () => {
