@@ -17,10 +17,10 @@
   "scripts": {
     "build": "npm run tsc-build",
     "watch": "npm-run-concurrently tsc-watch mocha-watch",
-    "test": "npm run build && mocha target/examples target/test",
+    "test": "npm run build && mocha target/examples target/tests",
     "tsc-build": "tsc --build",
     "tsc-watch": "tsc --build --watch",
-    "mocha-watch": "mocha target/examples target/test --watch"
+    "mocha-watch": "mocha target/examples target/tests --watch"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.0",
