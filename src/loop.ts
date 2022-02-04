@@ -1,7 +1,7 @@
 import { loopEvery } from "./impl/every"
 import { FilterLoop } from "./impl/filter"
 import { loopForEach } from "./impl/for_each"
-import { FromArrayLoop } from "./impl/from"
+import { FromArrayLoop } from "./impl/from_array"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
