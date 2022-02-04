@@ -17,6 +17,7 @@ import { TakeWhileLoop } from "./impl/take_while"
 import { SkipWhileLoop } from "./impl/skip_while"
 import { loopPick } from "./impl/pick"
 import { ChooseLoop } from "./impl/choose"
+import { FlatMapLoop } from "./impl/flat_map"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -91,6 +92,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   map<U>(mapping: (item: T, index: number) => U): Loop<U> {
     return new Loop(new MapLoop<T, U>(this.inner, mapping))
+  }
+
+  flatMap<U>(mapping: (item: T, index: number) => LoopInterface<U> | readonly U[]): Loop<U> {
+    return new Loop(new FlatMapLoop<T, U>(this.inner, mapping))
   }
 
   filter(predicate: (item: T, index: number) => boolean): Loop<T> {

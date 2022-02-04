@@ -59,6 +59,23 @@ it("map with indices", () => {
   equal(s, "0:a;1:b;2:c;3:d;4:e;")
 })
 
+it("flatMap", () => {
+  let s = ""
+  deepEqual(
+    Loop.fromArray([
+      [0, 1, 2],
+      Object.assign(Object.create(Loop.range(3, 5)), { toString: () => "3..5" }),
+    ])
+      .flatMap((x, i) => {
+        s += `${i}:${x};`
+        return x
+      })
+      .toArray(),
+    [0, 1, 2, 3, 4],
+  )
+  equal(s, "0:0,1,2;1:3..5;")
+})
+
 it("filter", () => {
   let t = ""
   let s = ""
@@ -77,12 +94,12 @@ it("choose", () => {
   let s = ""
   deepEqual(
     Loop.range(0, 5)
-    .map(x => "a_c_e"[x])
-    .choose((x, i) => {
-      s += `${i}:${x};`
-      return x !== "_" ? x.toUpperCase() : undefined
-    })
-    .toArray(),
+      .map(x => "a_c_e"[x])
+      .choose((x, i) => {
+        s += `${i}:${x};`
+        return x !== "_" ? x.toUpperCase() : undefined
+      })
+      .toArray(),
     ["A", "C", "E"],
   )
   equal(s, "0:a;1:_;2:c;3:_;4:e;")
