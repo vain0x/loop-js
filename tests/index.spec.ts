@@ -189,6 +189,11 @@ it("find (type guard)", () => {
   equal(e.message, "error")
 })
 
+it("pick", () => {
+  equal(Loop.range(0, 5).pick(x => x >= 1 && x % 3 === 0 ? `Fizz(${x})` : undefined), "Fizz(3)")
+  equal(Loop.range(0, 5).pick(() => undefined), undefined)
+})
+
 it("fromArray", () => {
   Loop.fromArray([]).forEach(() => { throw new Error("not called") })
 

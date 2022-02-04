@@ -15,6 +15,7 @@ import { loopJoin } from "./impl/join"
 import { loopFind } from "./impl/find"
 import { TakeWhileLoop } from "./impl/take_while"
 import { SkipWhileLoop } from "./impl/skip_while"
+import { loopPick } from "./impl/pick"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -131,5 +132,9 @@ export class Loop<T> implements LoopInterface<T> {
   find(predicate: (value: T, index: number) => unknown): T | undefined
   find(predicate: (value: T, index: number) => unknown): unknown {
     return loopFind(this.inner, predicate, { running: true })
+  }
+
+  pick<U>(picker: (value: T, index: number) => U | undefined): U | undefined {
+    return loopPick(this.inner, picker, { running: true })
   }
 }
