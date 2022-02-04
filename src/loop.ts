@@ -23,6 +23,7 @@ import { SortLoop } from "./impl/sort"
 import { EntriesLoop } from "./impl/entries"
 import { KeysLoop } from "./impl/keys"
 import { ConcatLoop } from "./impl/concat"
+import { loopIncludes } from "./impl/includes"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -170,6 +171,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   pick<U>(picker: (value: T, index: number) => U | undefined): U | undefined {
     return loopPick(this.inner, picker, { running: true })
+  }
+
+  includes(searchElement: T): boolean {
+    return loopIncludes(this.inner, searchElement)
   }
 
   sort(compare?: (x: T, y: T) => number): Loop<T> {

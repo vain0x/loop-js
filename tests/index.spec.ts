@@ -243,6 +243,11 @@ it("pick", () => {
   equal(Loop.range(0, 5).pick(() => undefined), undefined)
 })
 
+it("includes", () => {
+  equal(Loop.range(0, 5).includes(1), true)
+  equal(Loop.range(0, 5).includes(5), false)
+})
+
 it("from (array)", () => {
   Loop.from([]).forEach(() => { throw new Error("not called") })
 
