@@ -19,6 +19,7 @@ import { ChooseLoop } from "./impl/choose"
 import { FlatMapLoop } from "./impl/flat_map"
 import { FromIterableLoop, FromIteratorLoop } from "./impl/from_iterable"
 import { loopFrom, LoopSource } from "./impl/from"
+import { SortLoop } from "./impl/sort"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -63,7 +64,7 @@ export class Loop<T> implements LoopInterface<T> {
   }
 
   static from<T>(source: LoopSource<T>): Loop<T> {
-    return source instanceof Loop ? source : new Loop(loopFrom( source))
+    return source instanceof Loop ? source : new Loop(loopFrom(source))
   }
 
   static fromIterable<T>(iterable: Iterable<T>): Loop<T> {
@@ -154,5 +155,9 @@ export class Loop<T> implements LoopInterface<T> {
 
   pick<U>(picker: (value: T, index: number) => U | undefined): U | undefined {
     return loopPick(this.inner, picker, { running: true })
+  }
+
+  sort(compare?: (x: T, y: T) => number): Loop<T> {
+    return new Loop(new SortLoop(this.inner, compare))
   }
 }

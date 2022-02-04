@@ -272,6 +272,25 @@ it("join", () => {
   equal(Loop.range(0, 0).join(","), "")
 })
 
+it("sort", () => {
+  equal(Loop.from([3, 1, 4, 1, 5, 9]).sort(compare).join(","), "1,1,3,4,5,9")
+})
+
+it("sort (tracing)", () => {
+  let s = ""
+  equal(
+    Loop.from([3, 1, 4, 1, 5, 9])
+      .map(x => { s += `+${x};`; return x })
+      .sort(compare)
+      .filter(x => x !== 1)
+      .map(x => { s += `-${x};`; return x })
+      .join(","),
+    "3,4,5,9",
+  )
+  // Because `sort` makes a temporal array, all +s lead and -s follow.
+  equal(s, "+3;+1;+4;+1;+5;+9;-3;-4;-5;-9;")
+})
+
 describe("white-box", () => {
   it("reused loop object should work", () => {
     // Count of calls to the mapping.
@@ -315,3 +334,5 @@ describe("iterator interop", () => {
     deepEqual(loop.toArray(), [])
   })
 })
+
+const compare = <T>(a: T, b: T) => a === b ? 0 : (a < b ? -1 : 1)
