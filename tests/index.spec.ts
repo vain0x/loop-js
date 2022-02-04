@@ -114,6 +114,10 @@ it("entries", () => {
   equal(s, "0:a;1:b;2:c;3:d;4:e;")
 })
 
+it("keys", () => {
+  equal(Loop.from(new Array(5)).keys().join(","), "0,1,2,3,4")
+})
+
 it("every", () => {
   equal(Loop.range(0, 5).every(x => x < 5), true)
   equal(Loop.range(0, 5).every(x => x < 2), false)

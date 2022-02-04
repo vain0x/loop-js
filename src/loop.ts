@@ -21,6 +21,7 @@ import { FromIterableLoop, FromIteratorLoop } from "./impl/from_iterable"
 import { loopFrom, LoopSource } from "./impl/from"
 import { SortLoop } from "./impl/sort"
 import { EntriesLoop } from "./impl/entries"
+import { KeysLoop } from "./impl/keys"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -122,6 +123,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   entries(): Loop<readonly [number, T]> {
     return new Loop(new EntriesLoop(this.inner))
+  }
+
+  keys(): Loop<number> {
+    return new Loop(new KeysLoop(this.inner))
   }
 
   take(count: number): Loop<T> {
