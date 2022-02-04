@@ -1,6 +1,7 @@
 import assert from "assert"
 import { deepEqual, notEqual, equal } from "assert/strict"
 import { Loop } from "../src"
+import { LoopInterface } from "../src/loop"
 
 const isError = (value: unknown): value is Error => value instanceof Error
 
@@ -62,7 +63,7 @@ it("map with indices", () => {
 it("flatMap", () => {
   let s = ""
   deepEqual(
-    Loop.fromArray([
+    Loop.from([
       [0, 1, 2],
       Object.assign(Object.create(Loop.range(3, 5)), { toString: () => "3..5" }),
     ])
@@ -216,7 +217,7 @@ it("find", () => {
 })
 
 it("find (type guard)", () => {
-  const e = Loop.fromArray([{}, new Error("error")]).find(isError)
+  const e = Loop.from([{}, new Error("error")]).find(isError)
   assert.ok(e != undefined)
   equal(e.message, "error")
 })
@@ -226,24 +227,33 @@ it("pick", () => {
   equal(Loop.range(0, 5).pick(() => undefined), undefined)
 })
 
-it("fromArray", () => {
-  Loop.fromArray([]).forEach(() => { throw new Error("not called") })
+it("from (array)", () => {
+  Loop.from([]).forEach(() => { throw new Error("not called") })
 
   let s = ""
-  Loop.fromArray([0, 1, 2, 3, 4]).forEach(x => {
+  Loop.from([0, 1, 2, 3, 4]).forEach(x => {
     s += `${x};`
   })
   equal(s, "0;1;2;3;4;")
 })
 
-it("fromArray early break", () => {
+it("from (array) - early break", () => {
   let count = 0
-  const ok = Loop.fromArray([0, 1, 2, 3, 4]).every(x => {
+  const ok = Loop.from([0, 1, 2, 3, 4]).every(x => {
     count++
     return x < 2
   })
   equal(ok, false)
   equal(count, 3)
+})
+
+it("from (loop)", () => {
+  const customLoop: LoopInterface<number> = {
+    iterate: (action, _flow) => {
+      action(3); action(1); action(4)
+    }
+  }
+  equal(Loop.from(customLoop).map(x => x * 2).join(","), "6,2,8")
 })
 
 it("toArray", () => {

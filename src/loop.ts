@@ -1,7 +1,6 @@
 import { loopEvery } from "./impl/every"
 import { FilterLoop } from "./impl/filter"
 import { loopForEach } from "./impl/for_each"
-import { FromArrayLoop } from "./impl/from_array"
 import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
@@ -19,6 +18,7 @@ import { loopPick } from "./impl/pick"
 import { ChooseLoop } from "./impl/choose"
 import { FlatMapLoop } from "./impl/flat_map"
 import { FromIterableLoop, FromIteratorLoop } from "./impl/from_iterable"
+import { loopFrom, LoopSource } from "./impl/from"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -62,9 +62,8 @@ export class Loop<T> implements LoopInterface<T> {
     return new Loop(new RangeLoop(start, end))
   }
 
-  /** Creates a loop from an array. */
-  static fromArray<T>(source: readonly T[]): Loop<T> {
-    return new Loop(new FromArrayLoop(source))
+  static from<T>(source: LoopSource<T>): Loop<T> {
+    return source instanceof Loop ? source : new Loop(loopFrom( source))
   }
 
   static fromIterable<T>(iterable: Iterable<T>): Loop<T> {
