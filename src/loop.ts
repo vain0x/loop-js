@@ -16,6 +16,7 @@ import { loopFind } from "./impl/find"
 import { TakeWhileLoop } from "./impl/take_while"
 import { SkipWhileLoop } from "./impl/skip_while"
 import { loopPick } from "./impl/pick"
+import { ChooseLoop } from "./impl/choose"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -94,6 +95,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   filter(predicate: (item: T, index: number) => boolean): Loop<T> {
     return new Loop(new FilterLoop<T>(this.inner, predicate))
+  }
+
+  choose<U>(chooser: (item: T, index: number) => U | undefined): Loop<U> {
+    return new Loop(new ChooseLoop<T, U>(this.inner, chooser))
   }
 
   reverse(): Loop<T> {

@@ -73,6 +73,21 @@ it("filter", () => {
   equal(t, "0:a;1:_;2:c;3:_;4:e;")
 })
 
+it("choose", () => {
+  let s = ""
+  deepEqual(
+    Loop.range(0, 5)
+    .map(x => "a_c_e"[x])
+    .choose((x, i) => {
+      s += `${i}:${x};`
+      return x !== "_" ? x.toUpperCase() : undefined
+    })
+    .toArray(),
+    ["A", "C", "E"],
+  )
+  equal(s, "0:a;1:_;2:c;3:_;4:e;")
+})
+
 it("every", () => {
   equal(Loop.range(0, 5).every(x => x < 5), true)
   equal(Loop.range(0, 5).every(x => x < 2), false)
