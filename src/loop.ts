@@ -22,6 +22,7 @@ import { loopFrom, LoopSource } from "./impl/from"
 import { SortLoop } from "./impl/sort"
 import { EntriesLoop } from "./impl/entries"
 import { KeysLoop } from "./impl/keys"
+import { ConcatLoop } from "./impl/concat"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -147,6 +148,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   slice(start: number, end: number): Loop<T> {
     return new Loop(new SliceLoop<T>(this.inner, start, end))
+  }
+
+  concat(other: LoopSource<T>): Loop<T> {
+    return new Loop(new ConcatLoop(this.inner, other))
   }
 
   toArray(): T[] {

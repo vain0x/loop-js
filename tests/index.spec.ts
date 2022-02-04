@@ -223,6 +223,10 @@ it("slice extreme values", () => {
   deepEqual(Loop.range(0, 5).slice(-Infinity, Infinity).toArray(), [0, 1, 2, 3, 4])
 })
 
+it("concat", () => {
+  deepEqual(Loop.range(0, 5).concat(Loop.range(0, 3)).toArray(), [0, 1, 2, 3, 4, 0, 1, 2])
+})
+
 it("find", () => {
   equal(Loop.range(0, 5).find(x => x === 2), 2)
   equal(Loop.range(0, 5).find(x => x === 5), undefined)
