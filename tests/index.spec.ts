@@ -146,6 +146,15 @@ it("skip extreme values", () => {
   deepEqual(Loop.range(0, 5).skip(Infinity).toArray(), [])
 })
 
+it("takeWhile", () => {
+  let s = ""
+  deepEqual(Loop.range(0, 5).map(i => "abcde"[i]).takeWhile((x, i) => {
+    s += `${i}:${x};`
+    return i % 3 !== 2
+  }).toArray(), ["a", "b"])
+  equal(s, "0:a;1:b;2:c;")
+})
+
 it("slice", () => {
   deepEqual(Loop.range(0, 5).slice(1, 4).toArray(), [1, 2, 3])
 
