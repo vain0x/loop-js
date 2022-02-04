@@ -14,6 +14,7 @@ import { SliceLoop } from "./impl/slice"
 import { loopJoin } from "./impl/join"
 import { loopFind } from "./impl/find"
 import { TakeWhileLoop } from "./impl/take_while"
+import { SkipWhileLoop } from "./impl/skip_while"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -108,6 +109,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   takeWhile(predicate: (item: T, index: number) => boolean): Loop<T> {
     return new Loop(new TakeWhileLoop<T>(this.inner, predicate))
+  }
+
+  skipWhile(predicate: (item: T, index: number) => boolean): Loop<T> {
+    return new Loop(new SkipWhileLoop<T>(this.inner, predicate))
   }
 
   slice(start: number, end: number): Loop<T> {

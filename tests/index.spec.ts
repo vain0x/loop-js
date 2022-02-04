@@ -155,6 +155,15 @@ it("takeWhile", () => {
   equal(s, "0:a;1:b;2:c;")
 })
 
+it("skipWhile", () => {
+  let s = ""
+  deepEqual(Loop.range(0, 5).map(i => "abcde"[i]).skipWhile((x, i) => {
+    s += `${i}:${x};`
+    return i % 3 !== 2
+  }).toArray(), ["c", "d", "e"])
+  equal(s, "0:a;1:b;2:c;")
+})
+
 it("slice", () => {
   deepEqual(Loop.range(0, 5).slice(1, 4).toArray(), [1, 2, 3])
 
