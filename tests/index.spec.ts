@@ -106,6 +106,14 @@ it("choose", () => {
   equal(s, "0:a;1:_;2:c;3:_;4:e;")
 })
 
+it("entries", () => {
+  let s = ""
+  Loop.range(0, 5).map(i => "abcde"[i]).entries().forEach(([i, x]) => {
+    s += `${i}:${x};`
+  })
+  equal(s, "0:a;1:b;2:c;3:d;4:e;")
+})
+
 it("every", () => {
   equal(Loop.range(0, 5).every(x => x < 5), true)
   equal(Loop.range(0, 5).every(x => x < 2), false)

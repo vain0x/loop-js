@@ -20,6 +20,7 @@ import { FlatMapLoop } from "./impl/flat_map"
 import { FromIterableLoop, FromIteratorLoop } from "./impl/from_iterable"
 import { loopFrom, LoopSource } from "./impl/from"
 import { SortLoop } from "./impl/sort"
+import { EntriesLoop } from "./impl/entries"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -117,6 +118,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   reverse(): Loop<T> {
     return new Loop(new ReverseLoop<T>(this.inner))
+  }
+
+  entries(): Loop<readonly [number, T]> {
+    return new Loop(new EntriesLoop(this.inner))
   }
 
   take(count: number): Loop<T> {
