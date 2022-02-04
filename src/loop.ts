@@ -18,6 +18,7 @@ import { SkipWhileLoop } from "./impl/skip_while"
 import { loopPick } from "./impl/pick"
 import { ChooseLoop } from "./impl/choose"
 import { FlatMapLoop } from "./impl/flat_map"
+import { FromIterableLoop, FromIteratorLoop } from "./impl/from_iterable"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -64,6 +65,14 @@ export class Loop<T> implements LoopInterface<T> {
   /** Creates a loop from an array. */
   static fromArray<T>(source: readonly T[]): Loop<T> {
     return new Loop(new FromArrayLoop(source))
+  }
+
+  static fromIterable<T>(iterable: Iterable<T>): Loop<T> {
+    return new Loop(new FromIterableLoop(iterable))
+  }
+
+  static fromIterator<T>(iterator: Iterator<T>): Loop<T> {
+    return new Loop(new FromIteratorLoop(iterator))
   }
 
   // ---------------------------------------------

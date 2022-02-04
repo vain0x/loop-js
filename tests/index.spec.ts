@@ -283,3 +283,25 @@ describe("white-box", () => {
     }
   })
 })
+
+describe("iterator interop", () => {
+  it("fromIterable", () => {
+    const iterable: Iterable<string> = {
+      [Symbol.iterator]: () => "abc"[Symbol.iterator]()
+    }
+    const loop = Loop.fromIterable(iterable)
+    equal(loop.join(","), "a,b,c")
+
+    // Iterable is reusable.
+    equal(loop.toArray().join(","), "a,b,c")
+  })
+
+  it("fromIterator", () => {
+    const iterator: Iterator<string> = "abc"[Symbol.iterator]()
+    const loop = Loop.fromIterator(iterator)
+    equal(loop.join(","), "a,b,c")
+
+    // Iterator isn't reusable.
+    deepEqual(loop.toArray(), [])
+  })
+})
