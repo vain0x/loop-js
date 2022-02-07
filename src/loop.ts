@@ -24,6 +24,7 @@ import { EntriesLoop } from "./impl/entries"
 import { KeysLoop } from "./impl/keys"
 import { ConcatLoop } from "./impl/concat"
 import { loopIncludes } from "./impl/includes"
+import { ReplicateLoop } from "./impl/replicate"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -65,6 +66,10 @@ export class Loop<T> implements LoopInterface<T> {
    */
   static range(start: number, end: number): Loop<number> {
     return new Loop(new RangeLoop(start, end))
+  }
+
+  static replicate<T>(item: T, count: number): Loop<T> {
+    return new Loop(new ReplicateLoop(item, count))
   }
 
   static from<T>(source: LoopSource<T>): Loop<T> {

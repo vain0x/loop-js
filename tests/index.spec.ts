@@ -13,6 +13,14 @@ it("range", () => {
   equal(sum, 45)
 })
 
+it("replicate", () => {
+  let s = ""
+  Loop.replicate("+", 3).forEach(x => {
+    s += x
+  })
+  equal(s, "+++")
+})
+
 it("forEach", () => {
   let s = ""
   Loop.range(0, 5).map(i => "abcde"[i]).forEach((x, i) => {
