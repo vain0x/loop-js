@@ -25,6 +25,7 @@ import { KeysLoop } from "./impl/keys"
 import { ConcatLoop } from "./impl/concat"
 import { loopIncludes } from "./impl/includes"
 import { ReplicateLoop } from "./impl/replicate"
+import { FromMapLoop, FromSetLoop } from "./impl/from_map"
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
@@ -74,6 +75,14 @@ export class Loop<T> implements LoopInterface<T> {
 
   static from<T>(source: LoopSource<T>): Loop<T> {
     return source instanceof Loop ? source : new Loop(loopFrom(source))
+  }
+
+  static fromSet<T>(set: Set<T>): Loop<T> {
+    return new Loop(new FromSetLoop(set))
+  }
+
+  static fromMap<K, T>(map: Map<K, T>): Loop<readonly [K, T]> {
+    return new Loop(new FromMapLoop(map))
   }
 
   static fromIterable<T>(iterable: Iterable<T>): Loop<T> {

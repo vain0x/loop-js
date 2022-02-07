@@ -342,6 +342,18 @@ describe("white-box", () => {
   })
 })
 
+describe("map/set interop", () => {
+  it("fromMap", () => {
+    const map = new Map([[1, "a"], [2, "b"]])
+    equal(Loop.fromMap(map).join(";"), "1,a;2,b")
+  })
+
+  it("fromSet", () => {
+    const set = new Set([1, 2, 3])
+    equal(Loop.fromSet(set).join(";"), "1;2;3")
+  })
+})
+
 describe("iterator interop", () => {
   it("fromIterable", () => {
     const iterable: Iterable<string> = {
