@@ -45,7 +45,7 @@ export interface LoopInterface<T> {
  * Represents an iteration.
  */
 export class Loop<T> implements LoopInterface<T> {
-  constructor(private readonly inner: LoopInterface<T>) { }
+  constructor(readonly inner: LoopInterface<T>) { }
 
   // implements LoopInterface
   iterate(action: (item: T) => void, flow: Flow): void {
