@@ -1,5 +1,4 @@
-import assert from "assert"
-import { deepEqual, notEqual, equal } from "assert/strict"
+import assert, { deepEqual, notEqual, equal } from "assert/strict"
 import { Loop } from "../src"
 import type { LoopInterface } from "../src/loop_types"
 
@@ -229,6 +228,18 @@ it("slice", () => {
 
 it("slice extreme values", () => {
   deepEqual(Loop.range(0, 5).slice(-Infinity, Infinity).toArray(), [0, 1, 2, 3, 4])
+})
+
+it("at", () => {
+  const loop = Loop.range(0, 5).map(i => "abcde"[i])
+  equal(loop.at(0), "a")
+  equal(loop.at(4), "e")
+
+  equal(loop.at(-1), undefined)
+  equal(loop.at(0.5), undefined)
+  equal(loop.at(5), undefined)
+  equal(loop.at(NaN), undefined)
+  equal(loop.at(Infinity), undefined)
 })
 
 it("concat", () => {

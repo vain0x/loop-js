@@ -27,6 +27,7 @@ import { ConcatLoop } from "./impl/concat"
 import { loopIncludes } from "./impl/includes"
 import { ReplicateLoop } from "./impl/replicate"
 import { FromMapLoop, FromSetLoop } from "./impl/from_map"
+import { loopAt } from "./impl/at"
 
 /**
  * Represents an iteration.
@@ -150,6 +151,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   slice(start: number, end: number): Loop<T> {
     return new Loop(new SliceLoop<T>(this.inner, start, end))
+  }
+
+  at(index: number): T | undefined {
+    return loopAt(this.inner, index)
   }
 
   concat(other: LoopSource<T>): Loop<T> {
