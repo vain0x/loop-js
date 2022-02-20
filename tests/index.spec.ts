@@ -296,6 +296,25 @@ it("from (loop)", () => {
   equal(Loop.from(customLoop).map(x => x * 2).join(","), "6,2,8")
 })
 
+it("generator", () => {
+  const customLoop: Loop<number> = Loop.generate(push => {
+    push(2); push(7); push(1); push(8)
+  })
+  deepEqual(customLoop.toArray(), [2, 7, 1, 8])
+})
+
+it("generator - early break", () => {
+  const powerOfTwo: Loop<number> = Loop.generate((push, flow) => {
+    assert.ok(flow.running)
+    for (let n = 1; ; n *= 2) {
+      push(n)
+      if (!flow.running) return
+    }
+  })
+  deepEqual(powerOfTwo.take(3).toArray(), [1, 2, 4])
+  deepEqual(powerOfTwo.takeWhile(n => n < 1000).toArray().slice(-1), [512])
+})
+
 it("toArray", () => {
   const array = Loop.range(0, 5).toArray()
   deepEqual(array, [0, 1, 2, 3, 4])

@@ -81,6 +81,10 @@ export class Loop<T> implements LoopInterface<T> {
     return new Loop(new FromIteratorLoop(iterator))
   }
 
+  static generate<T>(generator: (yielder: (item: T) => void, flow: Flow) => void): Loop<T> {
+    return new Loop({ iterate: generator })
+  }
+
   // ---------------------------------------------
   // Combinators
   // ---------------------------------------------
