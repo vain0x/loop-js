@@ -371,6 +371,11 @@ it("empty", () => {
   deepEqual(Loop.from([1]).concat(Loop.empty()).toArray(), [1])
 })
 
+it("create", () => {
+  deepEqual(Loop.create(0, 1, 2).toArray(), [0, 1, 2])
+  deepEqual(Loop.create().toArray(), [])
+})
+
 describe("white-box", () => {
   it("reused loop object should work", () => {
     // Count of calls to the mapping.

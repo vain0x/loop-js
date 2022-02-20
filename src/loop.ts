@@ -91,6 +91,10 @@ export class Loop<T> implements LoopInterface<T> {
     return EMPTY
   }
 
+  static create<T = never>(...args: T[]): Loop<T> {
+    return new Loop(loopFrom(args))
+  }
+
   // ---------------------------------------------
   // Combinators
   // ---------------------------------------------
