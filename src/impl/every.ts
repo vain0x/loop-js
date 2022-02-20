@@ -1,7 +1,7 @@
-import type { LoopInterface } from "../loop_types"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export const loopEvery = <T>(source: LoopInterface<T>, predicate: (item: T, index: number) => boolean): boolean => {
-  const flow = { running: true }
+  const flow: Flow = { running: true }
   let ok = true
   let index = 0
   source.iterate(item => {

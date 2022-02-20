@@ -1,6 +1,7 @@
 import type { Flow, LoopInterface } from "../loop_types"
 
-export const loopJoin = (loop: LoopInterface<unknown>, sep: string, flow: Flow): string => {
+export const loopJoin = (loop: LoopInterface<unknown>, sep: string): string => {
+  const flow: Flow = { running: true }
   let first = true
   let output = ""
   loop.iterate(item => {

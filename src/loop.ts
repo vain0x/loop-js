@@ -92,7 +92,7 @@ export class Loop<T> implements LoopInterface<T> {
   // ---------------------------------------------
 
   forEach(action: (item: T, index: number) => void): void {
-    loopForEach(this.inner, action, { running: true })
+    loopForEach(this.inner, action)
   }
 
   reduce<S>(reducer: (prev: S, item: T, index: number) => S, initialValue: S): S
@@ -176,21 +176,21 @@ export class Loop<T> implements LoopInterface<T> {
   }
 
   toArray(): T[] {
-    return loopToArray(this.inner, { running: true })
+    return loopToArray(this.inner)
   }
 
   join(sep?: string): string {
-    return loopJoin(this.inner, sep ?? "", { running: true })
+    return loopJoin(this.inner, sep ?? "")
   }
 
   find<S extends T>(predicate: (value: T, index: number) => value is S): S | undefined
   find(predicate: (value: T, index: number) => unknown): T | undefined
   find(predicate: (value: T, index: number) => unknown): unknown {
-    return loopFind(this.inner, predicate, { running: true })
+    return loopFind(this.inner, predicate)
   }
 
   pick<U>(picker: (value: T, index: number) => U | undefined): U | undefined {
-    return loopPick(this.inner, picker, { running: true })
+    return loopPick(this.inner, picker)
   }
 
   includes(searchElement: T): boolean {

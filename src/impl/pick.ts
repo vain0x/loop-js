@@ -1,6 +1,7 @@
 import type { Flow, LoopInterface } from "../loop_types"
 
-export const loopPick = <T, U>(loop: LoopInterface<T>, picker: (value: T, index: number) => U | undefined, flow: Flow): U | undefined => {
+export const loopPick = <T, U>(loop: LoopInterface<T>, picker: (value: T, index: number) => U | undefined): U | undefined => {
+  const flow: Flow = { running: true }
   let index = 0
   let found: U | undefined
   loop.iterate(item => {

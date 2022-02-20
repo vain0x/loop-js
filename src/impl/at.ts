@@ -1,9 +1,9 @@
-import type { LoopInterface } from "../loop_types"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export const loopAt = <T>(source: LoopInterface<T>, index: number): T | undefined => {
   if (!Number.isInteger(index)) return undefined
 
-  const flow = { running: true }
+  const flow: Flow = { running: true }
   let found: T | undefined
   source.iterate(item => {
     if (index === 0) {

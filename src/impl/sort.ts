@@ -9,7 +9,7 @@ export class SortLoop<T> implements LoopInterface<T> {
   ) { }
 
   iterate(action: (item: T) => void, flow: Flow): void {
-    new FromArrayLoop(loopToArray(this.source, { running: true })
+    new FromArrayLoop(loopToArray(this.source)
       .sort(this.compare))
       .iterate(action, flow)
   }
