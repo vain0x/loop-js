@@ -28,6 +28,7 @@ import { loopIncludes } from "./impl/includes"
 import { ReplicateLoop } from "./impl/replicate"
 import { FromMapLoop, FromSetLoop } from "./impl/from_map"
 import { loopAt } from "./impl/at"
+import { loopCount } from "./impl/count"
 
 /**
  * Represents an iteration.
@@ -159,6 +160,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   at(index: number): T | undefined {
     return loopAt(this.inner, index)
+  }
+
+  count(): number {
+    return loopCount(this.inner)
   }
 
   concat(other: LoopSource<T>): Loop<T> {

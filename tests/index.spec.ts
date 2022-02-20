@@ -242,6 +242,10 @@ it("at", () => {
   equal(loop.at(Infinity), undefined)
 })
 
+it("count", () => {
+  equal(Loop.range(0, 5).count(), 5)
+})
+
 it("concat", () => {
   deepEqual(Loop.range(0, 5).concat(Loop.range(0, 3)).toArray(), [0, 1, 2, 3, 4, 0, 1, 2])
 })
