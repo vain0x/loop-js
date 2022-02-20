@@ -359,6 +359,18 @@ it("sort (tracing)", () => {
   equal(s, "+3;+1;+4;+1;+5;+9;-3;-4;-5;-9;")
 })
 
+it("empty", () => {
+  deepEqual(Loop.empty().toArray(), [])
+
+  // With type argument list.
+  let loop = Loop.empty<number>()
+  loop = Loop.from([0])
+  deepEqual(loop.toArray(), [0])
+
+  // Type inference.
+  deepEqual(Loop.from([1]).concat(Loop.empty()).toArray(), [1])
+})
+
 describe("white-box", () => {
   it("reused loop object should work", () => {
     // Count of calls to the mapping.

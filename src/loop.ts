@@ -87,6 +87,10 @@ export class Loop<T> implements LoopInterface<T> {
     return new Loop({ iterate: generator })
   }
 
+  static empty<T = never>(): Loop<T> {
+    return EMPTY
+  }
+
   // ---------------------------------------------
   // Combinators
   // ---------------------------------------------
@@ -201,3 +205,5 @@ export class Loop<T> implements LoopInterface<T> {
     return new Loop(new SortLoop(this.inner, compare))
   }
 }
+
+const EMPTY: Loop<never> = new Loop({ iterate: () => { } })
