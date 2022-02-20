@@ -1,7 +1,7 @@
 import assert from "assert"
 import { deepEqual, notEqual, equal } from "assert/strict"
 import { Loop } from "../src"
-import { LoopInterface } from "../src/loop"
+import type { LoopInterface } from "../src/loop_types"
 
 const isError = (value: unknown): value is Error => value instanceof Error
 

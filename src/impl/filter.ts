@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export class FilterLoop<T> implements LoopInterface<T> {
   constructor(

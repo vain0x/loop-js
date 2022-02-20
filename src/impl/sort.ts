@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 import { FromArrayLoop } from "./from_array"
 import { loopToArray } from "./to_array"
 

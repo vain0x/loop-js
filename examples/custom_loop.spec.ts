@@ -4,7 +4,7 @@
 // tree-shaking (dead-code elimination) works better.
 
 import assert from "assert"
-import type { Flow, LoopInterface } from "../src/loop" // "loop-js/loop"
+import type { Flow, LoopInterface } from "../src/loop_types" // "loop-js/loop_types"
 import { FromArrayLoop } from "../src/impl/from_array" // "loop-js/impl/from_array"
 import { loopEvery } from "../src/impl/every" // "loop-js/impl/every"
 

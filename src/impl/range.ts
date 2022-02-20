@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export class RangeLoop implements LoopInterface<number> {
   constructor(private readonly start: number, private readonly end: number) { }

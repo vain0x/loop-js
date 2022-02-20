@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export class FromMapLoop<K, T> implements LoopInterface<readonly [K, T]> {
   constructor(private readonly map: Map<K, T>) { }

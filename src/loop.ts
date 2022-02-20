@@ -1,3 +1,4 @@
+import type { LoopInterface, Flow } from "./loop_types"
 import { loopEvery } from "./impl/every"
 import { FilterLoop } from "./impl/filter"
 import { loopForEach } from "./impl/for_each"
@@ -26,20 +27,6 @@ import { ConcatLoop } from "./impl/concat"
 import { loopIncludes } from "./impl/includes"
 import { ReplicateLoop } from "./impl/replicate"
 import { FromMapLoop, FromSetLoop } from "./impl/from_map"
-
-export interface Flow {
-  /** Indicates current iteration is still running (not break). */
-  running: boolean
-}
-
-export interface LoopInterface<T> {
-  /**
-   * Runs a loop. That is, this function calls the specified action repeatedly.
-   *
-   * - Mutate `flow.running <- false` to `break` from current iteration.
-   */
-  iterate(action: (item: T) => void, flow: Flow): void
-}
 
 /**
  * Represents an iteration.

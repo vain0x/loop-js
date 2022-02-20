@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export const loopJoin = (loop: LoopInterface<unknown>, sep: string, flow: Flow): string => {
   let first = true

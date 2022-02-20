@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export const loopToArray = <T>(loop: LoopInterface<T>, flow: Flow) => {
   const output: T[] = []

@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export class SliceLoop<T> implements LoopInterface<T> {
   constructor(private readonly inner: LoopInterface<T>, private readonly start: number, private readonly end: number) { }

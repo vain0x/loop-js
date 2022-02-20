@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export function loopFind<T, S extends T>(loop: LoopInterface<T>, predicate: (value: T, index: number) => value is S, flow: Flow): S | undefined
 export function loopFind<T>(loop: LoopInterface<T>, predicate: (value: T, index: number) => unknown, flow: Flow): T | undefined

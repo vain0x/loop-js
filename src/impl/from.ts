@@ -1,4 +1,4 @@
-import type { LoopInterface } from "../loop"
+import type { LoopInterface } from "../loop_types"
 import { FromArrayLoop } from "./from_array"
 
 export type LoopSource<T> = readonly T[] | LoopInterface<T>

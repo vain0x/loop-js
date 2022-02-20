@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export class EntriesLoop<T> implements LoopInterface<readonly [number, T]> {
   constructor(

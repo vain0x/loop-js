@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export const loopForEach = <T>(loop: LoopInterface<T>, action: (item: T, index: number) => void, flow: Flow) => {
   let index = 0

@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 
 export function loopReduce<S, T>(source: LoopInterface<T>, reducer: (prev: S, item: T, index: number) => S, initialValue: S): S
 export function loopReduce<T>(source: LoopInterface<T>, reducer: (prev: T, item: T, index: number) => T): T

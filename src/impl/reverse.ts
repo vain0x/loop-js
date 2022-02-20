@@ -1,4 +1,4 @@
-import type { Flow, LoopInterface } from "../loop"
+import type { Flow, LoopInterface } from "../loop_types"
 import { loopToArray } from "./to_array"
 
 export class ReverseLoop<T> implements LoopInterface<T> {
