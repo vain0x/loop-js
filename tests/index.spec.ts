@@ -242,6 +242,11 @@ it("at", () => {
   equal(loop.at(Infinity), undefined)
 })
 
+it("last", () => {
+  equal(Loop.range(0, 5).map(i => "abcde"[i]).last(), "e")
+  equal(Loop.range(0, 0).last(), undefined)
+})
+
 it("count", () => {
   equal(Loop.range(0, 5).count(), 5)
 })

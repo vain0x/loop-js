@@ -29,6 +29,7 @@ import { ReplicateLoop } from "./impl/replicate"
 import { FromMapLoop, FromSetLoop } from "./impl/from_map"
 import { loopAt } from "./impl/at"
 import { loopCount } from "./impl/count"
+import { loopLast } from "./impl/last"
 
 /**
  * Represents an iteration.
@@ -160,6 +161,10 @@ export class Loop<T> implements LoopInterface<T> {
 
   at(index: number): T | undefined {
     return loopAt(this.inner, index)
+  }
+
+  last(): T | undefined {
+    return loopLast(this.inner)
   }
 
   count(): number {
