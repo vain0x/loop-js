@@ -255,6 +255,14 @@ it("concat", () => {
   deepEqual(Loop.range(0, 5).concat(Loop.range(0, 3)).toArray(), [0, 1, 2, 3, 4, 0, 1, 2])
 })
 
+it("prepend", () => {
+  deepEqual(Loop.range(0, 3).prepend(-1).toArray(), [-1, 0, 1, 2])
+})
+
+it("append", () => {
+  deepEqual(Loop.range(0, 3).append(3).toArray(), [0, 1, 2, 3])
+})
+
 it("find", () => {
   equal(Loop.range(0, 5).find(x => x === 2), 2)
   equal(Loop.range(0, 5).find(x => x === 5), undefined)

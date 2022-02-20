@@ -30,6 +30,8 @@ import { FromMapLoop, FromSetLoop } from "./impl/from_map"
 import { loopAt } from "./impl/at"
 import { loopCount } from "./impl/count"
 import { loopLast } from "./impl/last"
+import { PrependLoop } from "./impl/prepend"
+import { AppendLoop } from "./impl/append"
 
 /**
  * Represents an iteration.
@@ -181,6 +183,14 @@ export class Loop<T> implements LoopInterface<T> {
 
   concat(other: LoopSource<T>): Loop<T> {
     return new Loop(new ConcatLoop(this.inner, other))
+  }
+
+  prepend(item: T): Loop<T> {
+    return new Loop(new PrependLoop(this.inner, item))
+  }
+
+  append(item: T): Loop<T> {
+    return new Loop(new AppendLoop(this.inner, item))
   }
 
   toArray(): T[] {
