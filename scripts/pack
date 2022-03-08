@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -eu
+
+(
+    cd "$(dirname "$0")/.."
+
+    rm -rf lib tsconfig.commonjs.tsbuildinfo
+    npm run tsc-build --project tsconfig.commonjs.json
+    npm run tsc-build --project tsconfig.esm.json
+
+    echo '{"type": "module"}' >lib/esm/package.json
+)

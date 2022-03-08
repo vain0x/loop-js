@@ -1,0 +1,16 @@
+docs/
+examples/
+scripts/
+src/
+target/
+tests/
+.editorconfig
+.gitattributes
+.gitignore
+tsconfig.json
+*.map
+*.tsbuildinfo
+
+
+
+*.ignored.*

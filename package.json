@@ -14,6 +14,18 @@
     "iterator",
     "utility"
   ],
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "default": "./lib/index.js"
+    },
+    "./lib/*": {
+      "import": "./lib/esm/*.js",
+      "default": "./lib/*.js"
+    }
+  },
   "scripts": {
     "build": "npm run tsc-build",
     "dev": "npm-run-concurrently tsc-watch mocha-watch",
@@ -21,7 +33,8 @@
     "tsc-build": "tsc --build",
     "tsc-watch": "tsc --build --watch",
     "mocha-watch": "mocha target/examples target/tests --watch",
-    "bench": "node --expose-gc target/scripts/micro_benchmark"
+    "bench": "node --expose-gc target/scripts/micro_benchmark",
+    "pack": "sh scripts/pack"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.0",
