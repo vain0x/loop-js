@@ -8,6 +8,20 @@ API is similar to *Iterator*, however, *Loop* is slightly restricted yet more ef
 
 WIP: not published to npm yet
 
+## Documentation
+
+WIP: not yet. See comments on methods.
+
+Basically like this:
+
+```ts
+import { Loop } from "loop-js"
+
+Loop.range(0, 5) // Cerate
+  .map(x => x ** x) // Transform
+  .toArray() // Collect
+```
+
 ## Motivation
 
 *Iterator* interface is by design generates garbages in the order of iteration. That adds GC pressure. The design is necessary for its flexibility. However, most of iteration doesn't require such level of flexibility (in my personal opinion).
