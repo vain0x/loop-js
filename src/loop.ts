@@ -6,10 +6,8 @@ import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
 import { ReverseLoop } from "./impl/reverse"
-import { TakeLoop } from "./impl/take"
 import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
-import { SkipLoop } from "./impl/skip"
 import { SliceLoop } from "./impl/slice"
 import { loopJoin } from "./impl/join"
 import { loopFind } from "./impl/find"
@@ -389,16 +387,6 @@ export class Loop<T> implements LoopInterface<T> {
    */
   keys(): Loop<number> {
     return new Loop(new KeysLoop(this.inner))
-  }
-
-  // FIXME: remove this. slice(0, count) is enough
-  take(count: number): Loop<T> {
-    return new Loop(new TakeLoop<T>(this.inner, count))
-  }
-
-  // FIXME: remove this. slice(count) is enough
-  skip(count: number): Loop<T> {
-    return new Loop(new SkipLoop<T>(this.inner, count))
   }
 
   /**

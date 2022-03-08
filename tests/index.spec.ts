@@ -166,38 +166,6 @@ it("reverse", () => {
   equal(n, 3)
 })
 
-it("take", () => {
-  deepEqual(Loop.range(0, 5).take(0).toArray(), [])
-  deepEqual(Loop.range(0, 5).take(3).toArray(), [0, 1, 2])
-  deepEqual(Loop.range(0, 5).take(5).toArray(), [0, 1, 2, 3, 4])
-})
-
-it("take extreme values", () => {
-  // take(negative) and take(NaN) are empty.
-  deepEqual(Loop.range(0, 5).take(-1).every(() => false), true)
-  deepEqual(Loop.range(0, 5).take(-Infinity).every(() => false), true)
-  deepEqual(Loop.range(0, 5).take(NaN).toArray().length, 5)
-
-  // take(infinity) is full.
-  deepEqual(Loop.range(0, 5).take(Infinity).toArray().length, 5)
-})
-
-it("skip", () => {
-  deepEqual(Loop.range(0, 5).skip(0).toArray(), [0, 1, 2, 3, 4])
-  deepEqual(Loop.range(0, 5).skip(3).toArray(), [3, 4])
-  deepEqual(Loop.range(0, 5).skip(5).toArray(), [])
-})
-
-it("skip extreme values", () => {
-  // skip(negative) and skip(NaN) are full.
-  deepEqual(Loop.range(0, 5).skip(-1).toArray(), [0, 1, 2, 3, 4])
-  deepEqual(Loop.range(0, 5).skip(-Infinity).toArray(), [0, 1, 2, 3, 4])
-  deepEqual(Loop.range(0, 5).skip(NaN).toArray(), [0, 1, 2, 3, 4])
-
-  // skip(infinity) is empty.
-  deepEqual(Loop.range(0, 5).skip(Infinity).toArray(), [])
-})
-
 it("takeWhile", () => {
   let s = ""
   deepEqual(Loop.range(0, 5).map(i => "abcde"[i]).takeWhile((x, i) => {
@@ -328,7 +296,7 @@ it("generator - early break", () => {
       if (!flow.running) return
     }
   })
-  deepEqual(powerOfTwo.take(3).toArray(), [1, 2, 4])
+  deepEqual(powerOfTwo.slice(0, 3).toArray(), [1, 2, 4])
   deepEqual(powerOfTwo.takeWhile(n => n < 1000).toArray().slice(-1), [512])
 })
 
