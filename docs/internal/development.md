@@ -1,11 +1,5 @@
 # Notes for Development
 
-## .npmignore
-
-Exclude unnecessary files from the published package.
-
-- https://docs.npmjs.com/cli/v8/configuring-npm/package-json#files
-
 ## package.json
 
 `package.json` file contains configurations mixed for multiple tools.
@@ -17,6 +11,12 @@ Exclude unnecessary files from the published package.
 Enable this library to be imported as CommonJS and ESModule.
 
 https://nodejs.org/api/packages.html#main-entry-point-export
+
+### Files
+
+Published package contains only specified files.
+
+- https://docs.npmjs.com/cli/v8/configuring-npm/package-json#files
 
 ### scripts
 
