@@ -1,4 +1,4 @@
-import assert, { deepEqual, notEqual, equal } from "assert/strict"
+import assert, { deepEqual, equal, notEqual, throws } from "assert/strict"
 import { Loop } from "../src"
 import type { LoopInterface } from "../src/loop_types"
 
@@ -46,6 +46,12 @@ it("reduce without initial value", () => {
   })
   equal(result, "abcde")
   equal(s, "1:a:b;2:ab:c;3:abc:d;4:abcd:e;")
+})
+
+it("reduce without initial value (empty error)", () => {
+  throws(() => {
+    Loop.empty<number>().reduce((l, r) => l + r)
+  })
 })
 
 it("map", () => {

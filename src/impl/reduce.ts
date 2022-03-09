@@ -16,6 +16,7 @@ export function loopReduce(source: LoopInterface<any>, reducer: any, state?: any
       if (index === 0) { state = item; index = 1; return }
       state = reducer(state, item, index++)
     }, flow)
+    if (index === 0) throw new Error("Reduce of empty loop with no initial value")
     return state
   }
 }
