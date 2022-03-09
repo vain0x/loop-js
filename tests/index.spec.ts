@@ -182,22 +182,6 @@ it("take extreme values", () => {
   deepEqual(Loop.range(0, 5).take(Infinity).toArray().length, 5)
 })
 
-it("skip", () => {
-  deepEqual(Loop.range(0, 5).skip(0).toArray(), [0, 1, 2, 3, 4])
-  deepEqual(Loop.range(0, 5).skip(3).toArray(), [3, 4])
-  deepEqual(Loop.range(0, 5).skip(5).toArray(), [])
-})
-
-it("skip extreme values", () => {
-  // skip(negative) and skip(NaN) are full.
-  deepEqual(Loop.range(0, 5).skip(-1).toArray(), [0, 1, 2, 3, 4])
-  deepEqual(Loop.range(0, 5).skip(-Infinity).toArray(), [0, 1, 2, 3, 4])
-  deepEqual(Loop.range(0, 5).skip(NaN).toArray(), [0, 1, 2, 3, 4])
-
-  // skip(infinity) is empty.
-  deepEqual(Loop.range(0, 5).skip(Infinity).toArray(), [])
-})
-
 it("takeWhile", () => {
   let s = ""
   deepEqual(Loop.range(0, 5).map(i => "abcde"[i]).takeWhile((x, i) => {
