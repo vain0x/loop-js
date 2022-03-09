@@ -8,6 +8,9 @@ export interface LoopInterface<T> {
   iterate(action: (item: T) => void, flow: Flow): void
 }
 
+/** Value that a loop can be made from. */
+export type LoopSource<T> = readonly T[] | LoopInterface<T>
+
 export interface Flow {
   /** Indicates current iteration is still running (not break). */
   running: boolean

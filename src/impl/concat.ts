@@ -1,5 +1,5 @@
-import type { Flow, LoopInterface } from "../loop_types"
-import { loopFrom, LoopSource } from "./from"
+import type { Flow, LoopInterface, LoopSource } from "../loop_types"
+import { loopFrom } from "./from"
 
 export class ConcatLoop<T> implements LoopInterface<T> {
   constructor(
