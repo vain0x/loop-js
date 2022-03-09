@@ -1,8 +1,9 @@
+/** Represents an iteration. */
 export interface LoopInterface<T> {
   /**
    * Runs a loop. That is, this function calls the specified action repeatedly.
    *
-   * - Mutate `flow.running <- false` to `break` from current iteration.
+   * - Mutate `flow.running = false` to `break` from current iteration.
    */
   iterate(action: (item: T) => void, flow: Flow): void
 }

@@ -31,9 +31,7 @@ import { loopLast } from "./impl/last"
 import { PrependLoop } from "./impl/prepend"
 import { AppendLoop } from "./impl/append"
 
-/**
- * Represents an iteration.
- */
+/** Represents an iteration and supports method-chain API. */
 export class Loop<T> implements LoopInterface<T> {
   constructor(readonly inner: LoopInterface<T>) { }
 
