@@ -9,7 +9,7 @@ export interface LoopInterface<T> {
 }
 
 /** Value that a loop can be made from. */
-export type LoopSource<T> = readonly T[] | LoopInterface<T>
+export type LoopSource<T> = readonly T[] | LoopInterface<T> | null
 
 export interface Flow {
   /** Indicates current iteration is still running (not break). */

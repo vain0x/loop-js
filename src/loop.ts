@@ -30,6 +30,7 @@ import { loopCount } from "./impl/count"
 import { loopLast } from "./impl/last"
 import { PrependLoop } from "./impl/prepend"
 import { AppendLoop } from "./impl/append"
+import { EMPTY_LOOP } from "./impl/empty"
 
 /** Represents an iteration and supports method-chain API. */
 export class Loop<T> implements LoopInterface<T> {
@@ -631,4 +632,4 @@ export class Loop<T> implements LoopInterface<T> {
   }
 }
 
-const EMPTY: Loop<never> = new Loop({ iterate: () => { } })
+const EMPTY: Loop<never> = new Loop(EMPTY_LOOP)

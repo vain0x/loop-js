@@ -303,6 +303,10 @@ it("from (loop)", () => {
   equal(Loop.from(customLoop).map(x => x * 2).join(","), "6,2,8")
 })
 
+it("from (null)", () => {
+  equal(Loop.from(null).count(), 0)
+})
+
 it("generator", () => {
   const customLoop: Loop<number> = Loop.generate(push => {
     push(2); push(7); push(1); push(8)
