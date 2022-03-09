@@ -6,7 +6,6 @@ import { MapLoop } from "./impl/map"
 import { RangeLoop } from "./impl/range"
 import { loopReduce } from "./impl/reduce"
 import { ReverseLoop } from "./impl/reverse"
-import { TakeLoop } from "./impl/take"
 import { loopSome } from "./impl/some"
 import { loopToArray } from "./impl/to_array"
 import { SliceLoop } from "./impl/slice"
@@ -390,9 +389,20 @@ export class Loop<T> implements LoopInterface<T> {
     return new Loop(new KeysLoop(this.inner))
   }
 
-  // FIXME: remove this. slice(0, count) is enough
+  /**
+   * Creates a loop that is limited to the specified number of items.
+   *
+   * - Equivalent to `this.slice(0, count)`.
+   *
+   * ## Edge cases
+   *
+   * The specified count may exceed the total count.
+   *
+   * - If `count` is negative, the specified range is empty and produced loop is empty.
+   * - if `count` is larger than the number of items, it doesn't affect the underlying loop as result.
+   */
   take(count: number): Loop<T> {
-    return new Loop(new TakeLoop<T>(this.inner, count))
+    return this.slice(0, count)
   }
 
   /**
