@@ -413,15 +413,6 @@ describe("iterator interop", () => {
     // Iterable is reusable.
     equal(loop.toArray().join(","), "a,b,c")
   })
-
-  it("fromIterator", () => {
-    const iterator: Iterator<string> = "abc"[Symbol.iterator]()
-    const loop = Loop.fromIterator(iterator)
-    equal(loop.join(","), "a,b,c")
-
-    // Iterator isn't reusable.
-    deepEqual(loop.toArray(), [])
-  })
 })
 
 const compare = <T>(a: T, b: T) => a === b ? 0 : (a < b ? -1 : 1)

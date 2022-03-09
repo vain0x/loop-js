@@ -16,7 +16,7 @@ import { SkipWhileLoop } from "./impl/skip_while"
 import { loopPick } from "./impl/pick"
 import { ChooseLoop } from "./impl/choose"
 import { FlatMapLoop } from "./impl/flat_map"
-import { FromIterableLoop, FromIteratorLoop } from "./impl/from_iterable"
+import { FromIterableLoop } from "./impl/from_iterable"
 import { loopFrom, LoopSource } from "./impl/from"
 import { SortLoop } from "./impl/sort"
 import { EntriesLoop } from "./impl/entries"
@@ -146,20 +146,6 @@ export class Loop<T> implements LoopInterface<T> {
    */
   static fromIterable<T>(iterable: Iterable<T>): Loop<T> {
     return new Loop(new FromIterableLoop(iterable))
-  }
-
-  /**
-   * *Only for niche use cases.*
-   *
-   * Creates a loop that wraps an iterator.
-   *
-   * ## Remark
-   *
-   * Running an iterator does mutate internal state of iterable.
-   * Reusing such loop unlikely works as expected.
-   */
-  static fromIterator<T>(iterator: Iterator<T>): Loop<T> {
-    return new Loop(new FromIteratorLoop(iterator))
   }
 
   /**
